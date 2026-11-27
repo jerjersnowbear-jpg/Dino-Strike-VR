@@ -1,4 +1,4 @@
-# DINO STRIKE VR 1.1: Realism Edition
+# DINO STRIKE VR 1.2: Cinematic Edition
 
 A standalone browser-based, controller-free arcade game for smartphone Cardboard-style viewers. An automatic rail cart moves forward through three procedural landscapes. The player aims by turning their head. The first uninterrupted five-second lock on a single moving target triggers a non-graphic energy burst. Looking away or switching targets resets the timer. Raptor, T-Rex, Triceratops and flying Pteranodon opponents move toward the cart. Pteranodon is a prehistoric flying reptile, not technically a dinosaur.
 
@@ -23,3 +23,6 @@ Use seated, with adult supervision and only if the viewer's age and fit guidance
 - Procedural skin, stone, leaf, bark and metal shading; sky gradients, clouds, directional light and distance fog with a palette for each zone.
 - Two alternating scenery tiles per zone, detailed rails, cart-mounted laser housings, energy effects and approximate contact shadows.
 - No external asset downloads. The stereo startup and five-second gaze-lock rules are unchanged. Geometry and model matrices were verified with mock WebGL. A separate real WebGL browser smoke test was added to CI; its results and physical phone performance must be confirmed. These are stylized procedural models, not photorealistic artist-authored assets. There is no native Cardboard SDK integration or viewer-specific lens correction.
+
+## 1.2 Cinematic mode
+Select Cinematic models and wait for the status counter to reach four. The separate Three.js renderer uses animated glTF/GLB imports, physical materials, photographic textures, a forest panorama and HDR lighting. The original targeting and ride rules are unchanged. Missing models use procedural substitutes. If the renderer fails or frame intervals remain above 100 ms for three seconds, moving rides pause and Classic graphics are selected. The first cinematic download requires internet, unless all dependencies are installed locally. Browser CORS, memory and device speed may affect loading. The new CI workflow prepares an optional same-origin asset pack and uploads it as an Actions artifact. Extract that pack into the repository's assets folder if direct downloads fail. Classic mode remains self-contained. Cinematic output and physical phone performance are not yet verified.
