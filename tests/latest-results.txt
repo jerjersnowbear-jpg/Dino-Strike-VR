@@ -5,3 +5,5 @@ PASS: attack travel time and shield collision
 PASS: flying dinosaur tracking and bonus score
 PASS: stereo preview, safety gate, pause and return
 PASS: portrait rejected
+
+1.3.1 update: PASS targeted gazeStep test (1.9 seconds no shot, 2.0 seconds shot, target switch and loss reset); JS syntax passed. Full browser and device regression pending.
