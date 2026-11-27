@@ -1,4 +1,4 @@
-# DINO STRIKE VR 1.3.1: Photo Realism Edition
+# DINO STRIKE VR 1.3.2: Photo Realism Edition
 
 A standalone browser-based, controller-free arcade game for smartphone Cardboard-style viewers. An automatic rail cart moves forward through three procedural landscapes. The player aims by turning their head. The first uninterrupted two-second lock on a single moving target triggers a non-graphic energy burst. Looking away or switching targets resets the timer. Raptor, T-Rex, Triceratops and flying Pteranodon opponents move toward the cart. Pteranodon is a prehistoric flying reptile, not technically a dinosaur.
 
@@ -31,3 +31,6 @@ Select Cinematic models and wait for the status counter to reach four. The separ
 Adds real-time directional shadows, normal/roughness maps for terrain, photographic bark, and optional scanned fern and mossy rock models. The automatic Photo Realism build downloads and validates models, copies Three.js and assets into one self-contained site, then runs a local-only WebGL stereo test. The branch-hosted site still uses external fallback sources for assets not present locally. To publish the packaged site, choose Settings > Pages > Source > GitHub Actions, then Actions > Build and publish photorealistic edition > Run workflow with publish checked. This is an explicit deployment; the regular push build only produces a downloadable artifact. The current build and visual output require verification. Classic mode remains available.
 ## 1.3.1
 Continuous laser lock reduced to 2 seconds in both graphics modes. Looking away or switching targets still resets it. Countdown and charge ring derive from the same constant.
+
+## 1.3.2
+Live gaze-lock charge uses real elapsed time independently of the capped physics timestep. First acquisition starts at zero, gaps longer than 750 ms reset charge, and pauses or target changes still reset. Use play-1.3.2.html for a release-specific URL. Both entry pages share the same code.
