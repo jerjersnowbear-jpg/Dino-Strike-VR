@@ -1,4 +1,4 @@
-# DINO STRIKE VR 1.2: Cinematic Edition
+# DINO STRIKE VR 1.3: Photo Realism Edition
 
 A standalone browser-based, controller-free arcade game for smartphone Cardboard-style viewers. An automatic rail cart moves forward through three procedural landscapes. The player aims by turning their head. The first uninterrupted five-second lock on a single moving target triggers a non-graphic energy burst. Looking away or switching targets resets the timer. Raptor, T-Rex, Triceratops and flying Pteranodon opponents move toward the cart. Pteranodon is a prehistoric flying reptile, not technically a dinosaur.
 
@@ -26,3 +26,6 @@ Use seated, with adult supervision and only if the viewer's age and fit guidance
 
 ## 1.2 Cinematic mode
 Select Cinematic models and wait for the status counter to reach four. The separate Three.js renderer uses animated glTF/GLB imports, physical materials, photographic textures, a forest panorama and HDR lighting. The original targeting and ride rules are unchanged. Missing models use procedural substitutes. If the renderer fails or frame intervals remain above 100 ms for three seconds, moving rides pause and Classic graphics are selected. The first cinematic download requires internet, unless all dependencies are installed locally. Browser CORS, memory and device speed may affect loading. The new CI workflow prepares an optional same-origin asset pack and uploads it as an Actions artifact. Extract that pack into the repository's assets folder if direct downloads fail. Classic mode remains self-contained. Cinematic output and physical phone performance are not yet verified.
+
+## 1.3
+Adds real-time directional shadows, normal/roughness maps for terrain, photographic bark, and optional scanned fern and mossy rock models. The automatic Photo Realism build downloads and validates models, copies Three.js and assets into one self-contained site, then runs a local-only WebGL stereo test. The branch-hosted site still uses external fallback sources for assets not present locally. To publish the packaged site, choose Settings > Pages > Source > GitHub Actions, then Actions > Build and publish photorealistic edition > Run workflow with publish checked. This is an explicit deployment; the regular push build only produces a downloadable artifact. The current build and visual output require verification. Classic mode remains available.

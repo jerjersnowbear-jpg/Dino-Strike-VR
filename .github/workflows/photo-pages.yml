@@ -1,0 +1,60 @@
+name: Build and publish photorealistic edition
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Deploy to GitHub Pages (requires Settings > Pages > GitHub Actions)"
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths: ['cinematic.mjs','index.html','scripts/prepare_assets.py','scripts/stage_site.py','.github/workflows/photo-pages.yml']
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: node --check cinematic.mjs
+      - run: npm install --no-save --ignore-scripts --no-audit --no-fund three@0.170.0
+      - run: python scripts/prepare_assets.py
+      - run: python scripts/stage_site.py
+      - run: pip install playwright
+      - run: python -m playwright install --with-deps chromium
+      - run: python tests/photo_webgl.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: photorealistic-site
+          path: |
+            site/
+            photo-proof.png
+            assets/report.json
+          include-hidden-files: true
+          if-no-files-found: warn
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name == 'workflow_dispatch' && inputs.publish
+        with:
+          path: site/
+  deploy:
+    if: github.event_name == 'workflow_dispatch' && inputs.publish
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy validated site
+        id: deployment
+        uses: actions/deploy-pages@v4
