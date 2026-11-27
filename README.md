@@ -1,4 +1,4 @@
-# DINO STRIKE VR 1.0
+# DINO STRIKE VR 1.1: Realism Edition
 
 A standalone browser-based, controller-free arcade game for smartphone Cardboard-style viewers. An automatic rail cart moves forward through three procedural landscapes. The player aims by turning their head. The first uninterrupted five-second lock on a single moving target triggers a non-graphic energy burst. Looking away or switching targets resets the timer. Raptor, T-Rex, Triceratops and flying Pteranodon opponents move toward the cart. Pteranodon is a prehistoric flying reptile, not technically a dinosaur.
 
@@ -15,4 +15,11 @@ Gentle is the default. Comfort and Arcade increase the forward movement speed. E
 Use seated, with adult supervision and only if the viewer's age and fit guidance permits. Start on screen and with the slowest speed. Remove the viewer and stop at any discomfort. No physical movement is required. The game uses a moving virtual viewpoint and can cause motion sickness. It does not implement forced fullscreen, official Cardboard SDK or viewer-specific lens distortion correction.
 
 ## Verification
-`python tests/smoke.py` uses Playwright with mock WebGL to validate the application logic, 5-second dwell, switching/interruptions, motion of the ride, enemy collision, flying target scoring, two-eye overlay and safety gate. The current environment blocked normal Chromium file navigation, so actual 3D rendering and physical smartphone/headset motion have not been verified. GitHub Actions can rerun the same logic tests. The scene uses stylized procedural graphics; this initial edition is a moving straight-rail expedition, not a full roller coaster with loops or steep drops. Offline caching is included but not physically verified.
+`python tests/smoke.py` uses Playwright with mock WebGL to validate the application logic, 5-second dwell, switching/interruptions, motion of the ride, enemy collision, flying target scoring, two-eye overlay and safety gate. The current environment blocked normal Chromium file navigation, so actual 3D rendering and physical smartphone/headset motion have not been verified. GitHub Actions can rerun the same logic tests. The scene uses enhanced procedural 3D graphics; it remains a moving straight-rail expedition, not a full roller coaster with loops or steep drops. Offline caching is included but not physically verified.
+
+
+## 1.1 visual upgrade
+- Organic reusable meshes, tapered limbs and tails, claw and tooth geometry, modeled wing membranes, improved heads and running poses.
+- Procedural skin, stone, leaf, bark and metal shading; sky gradients, clouds, directional light and distance fog with a palette for each zone.
+- Two alternating scenery tiles per zone, detailed rails, cart-mounted laser housings, energy effects and approximate contact shadows.
+- No external asset downloads. The stereo startup and five-second gaze-lock rules are unchanged. Geometry and model matrices were verified with mock WebGL. A separate real WebGL browser smoke test was added to CI; its results and physical phone performance must be confirmed. These are stylized procedural models, not photorealistic artist-authored assets. There is no native Cardboard SDK integration or viewer-specific lens correction.

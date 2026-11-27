@@ -11,6 +11,8 @@ with sync_playwright() as p:
     page.set_content(html);assert page.evaluate('!!window.__ride'),errors
     if os.environ.get('MENU_PREVIEW'):page.screenshot(path=os.environ['MENU_PREVIEW'])
     print('PASS: application initialized with mock WebGL')
+    stats=page.evaluate('__ride.visualStats()');assert stats['variants']==[2,2,2] and len(stats['dino'])==4 and min(stats['dino'])>15,stats
+    print('PASS: six scenery variants and four enhanced dinosaur meshes')
     page.evaluate('''()=>{let f=__ride.gazeStep,g={id:null,seconds:0};for(let i=0;i<49;i++)g=f(g,1,.1);if(g.fire||g.seconds<4.89)throw Error('premature fire');g=f(g,null,.1);if(g.seconds!==0||g.fire)throw Error('loss not reset');g=f({id:1,seconds:4.9},2,.1);if(g.seconds!==.1||g.fire)throw Error('switch not reset');g={id:null,seconds:0};for(let i=0;i<50;i++)g=f(g,1,.1);if(!g.fire)throw Error('no shot at 5 seconds')}''')
     print('PASS: five-second continuous lock, interruption reset, target switch reset')
     result=page.evaluate('''()=>{let v=__ride;v.start(false);v.setMode('comfort');v.spawn();let id=v.state.enemies[0].id;for(let i=0;i<51&&v.state.enemies.some(e=>e.id===id);i++){v.aim(id);v.advance(.1)}let s=v.state;if(s.hits!==1||s.score!==100||s.dist<19)throw Error(JSON.stringify(s));v.menu();return {score:s.score,dist:s.dist}}''');print('PASS: moving ride, charging raptor, laser hit, points:',result)
