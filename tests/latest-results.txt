@@ -1,0 +1,7 @@
+PASS: application initialized with mock WebGL
+PASS: five-second continuous lock, interruption reset, target switch reset
+PASS: moving ride, charging raptor, laser hit, points: {'score': 100, 'dist': 19.999999999999993}
+PASS: attack travel time and shield collision
+PASS: flying dinosaur tracking and bonus score
+PASS: stereo preview, safety gate, pause and return
+PASS: portrait rejected
