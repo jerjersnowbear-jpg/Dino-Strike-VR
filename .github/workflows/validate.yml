@@ -19,3 +19,4 @@ jobs:
       - run: python -m playwright install --with-deps chromium
       - run: python tests/smoke.py
       - run: python tests/real_webgl.py
+      - run: python tests/island_smoke.py

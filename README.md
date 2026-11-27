@@ -1,4 +1,4 @@
-# DINO STRIKE VR 1.3.2: Photo Realism Edition
+# DINO STRIKE VR 2.0 | Extinction Island
 
 A standalone browser-based, controller-free arcade game for smartphone Cardboard-style viewers. An automatic rail cart moves forward through three procedural landscapes. The player aims by turning their head. The first uninterrupted two-second lock on a single moving target triggers a non-graphic energy burst. Looking away or switching targets resets the timer. Raptor, T-Rex, Triceratops and flying Pteranodon opponents move toward the cart. Pteranodon is a prehistoric flying reptile, not technically a dinosaur.
 
@@ -34,3 +34,6 @@ Continuous laser lock reduced to 2 seconds in both graphics modes. Looking away 
 
 ## 1.3.2
 Live gaze-lock charge uses real elapsed time independently of the capped physics timestep. First acquisition starts at zero, gaps longer than 750 ms reset charge, and pauses or target changes still reset. Use play-1.3.2.html for a release-specific URL. Both entry pages share the same code.
+
+## Extinction Island 2.0
+Ten attractions, comfort-adjusted hills and curves, elevated track, underwater stylized marine reptiles, volcanic and nighttime settings, rear encounters in night/endless, three-hit alpha enemies, pickups, route choice gates, four ranked laser effects, combo scoring, local achievements and a peaceful observation mode. Two-second real-time continuous gaze lock is preserved. Gentle keeps a flat path; Comfort and Arcade introduce hills and curves without camera roll. The Cinematic renderer adds adaptive resolution and mission-specific lighting. The older release is available at play-1.3.2.html with its original renderer. External dinosaur/photographic assets require successful downloads or the validated Pages build. Native Cardboard SDK, film-grade assets, physically simulated water/weather/destruction, full positional audio and phone validation remain outstanding.

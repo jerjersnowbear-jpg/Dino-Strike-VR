@@ -1,0 +1,13 @@
+from pathlib import Path
+from playwright.sync_api import sync_playwright
+ROOT=Path(__file__).resolve().parents[1]
+MOCK='''<script>let id=0;const real=HTMLCanvasElement.prototype.getContext;const mock=new Proxy({getShaderParameter:()=>true,getProgramParameter:()=>true,getAttribLocation:()=>0,getUniformLocation:()=>({}),createBuffer:()=>({}),createShader:()=>({}),createProgram:()=>({}),createTexture:()=>({})},{get(t,k){if(k in t)return t[k];if(/^[A-Z0-9_]+$/.test(k))return ++id;return ()=>{}}});HTMLCanvasElement.prototype.getContext=function(k,...a){return k==='webgl'?mock:real.call(this,k,...a)};Object.defineProperty(window,'localStorage',{value:{getItem:()=>null,setItem:()=>{}}});</script>'''
+with sync_playwright() as p:
+    b=p.chromium.launch(headless=True,args=['--no-sandbox'])
+    page=b.new_page(viewport={'width':1100,'height':650});errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+    html=(ROOT/'index.html').read_text().replace("<script>\n'use strict';",MOCK+"<script>\n'use strict';",1).replace("if(new URLSearchParams(location.search).has('test'))window.__ride=","window.__ride=")
+    page.set_content(html);assert page.evaluate('!!window.__ride'),errors
+    result=page.evaluate("""()=>{let v=__ride;document.getElementById('graphics').value='classic';let init=(n)=>{v.menu();v.setAttraction(n);v.start(false)},check=(b,m)=>{if(!b)throw Error(m)},lock=(id,n=20)=>{for(let i=0;i<n;i++){v.aim(id);v.advance(.1)}};for(let n of Object.keys(v.attractions)){init(n);v.spawn();v.render(v.camera());check(v.state.frameCount>=2,n)}init('safari');v.spawn();let id=v.state.enemies[0].id;lock(id,19);check(v.state.hits===0,'early');lock(id,1);check(v.state.hits===1,'two seconds');init('boss');v.spawn();id=v.state.enemies[0].id;check(v.state.enemies[0].hp===3,'alpha');lock(id);check(v.state.enemies.find(e=>e.id===id).hp===2,'phase1');lock(id);check(v.state.enemies.find(e=>e.id===id).hp===1,'phase2');lock(id);check(v.state.bossKills===1,'boss');init('sanctuary');v.spawn();id=v.state.enemies[0].id;lock(id);check(v.state.observations===1&&v.state.hits===0&&v.state.shield===5,'peaceful');v.finish(true);check(v.profile.xp>0,'progress');init('safari');id=v.addPickup('bonus');lock(id);check(v.state.score>=250,'bonus');id=v.addPickup('forkLeft');lock(id);check(v.state.routeChoice===1,'branch');init('coaster');v.setMode('arcade');check(v.trackPoint(30)[1]>.2,'hills');v.menu();v.setAttraction('safari');v.start(true,true);check(v.state.vr&&v.state.preview,'stereo');return 'PASS: ten rides, timing, alpha, observation, progression, pickup, branching, hills, stereo'}""")
+    assert page.locator('#hud .eye').count()==2
+    assert not errors,errors
+    print(result);b.close()
